@@ -4,7 +4,7 @@ from __future__ import print_function
 
 import numpy as np
 from keras import Sequential
-from keras.layers import Dense, Dropout
+from keras.layers import Dense
 from six.moves import range
 
 
@@ -30,8 +30,8 @@ class NeuralNetwork:
     """This class implements an approximator for the quality function using a neural network."""
 
     GAMMA = 0.99  # discount factor for Q-learning
-    BATCH_SIZE = 32
-    NB_EPOCHS = 3
+    BATCH_SIZE = 128
+    NB_EPOCHS = 5
 
     def __init__(self, checkpoint=0):
         """initializes the neural network
@@ -41,10 +41,9 @@ class NeuralNetwork:
         """
         # construct a simple feedforward-network
         model = Sequential()
-        model.add(Dense(14, input_dim=18, activation='relu'))
-        model.add(Dense(9, activation='relu'))
-        model.add(Dropout(0.3))
-        model.add(Dense(1))
+        model.add(Dense(18, input_dim=18, activation='relu', use_bias=True))
+        model.add(Dense(10, activation='relu', use_bias=True))
+        model.add(Dense(1, use_bias=True))
         model.compile(optimizer='Adam', loss='mse', metrics=['accuracy'])
         # load checkpoint
         if checkpoint > 0:
