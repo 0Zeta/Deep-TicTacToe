@@ -26,7 +26,7 @@ class QApproximator:
         raise NotImplementedError()
 
 
-class NeuralNetwork:
+class NeuralNetwork(QApproximator):
     """This class implements an approximator for the quality function using a neural network."""
 
     GAMMA = 0.99  # discount factor for Q-learning
